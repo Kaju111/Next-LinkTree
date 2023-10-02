@@ -35,7 +35,7 @@ const Apply = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        if(data.status === "success"){
+        if(data.status === "success") {
           toast("You are registered successfully ");
           localStorage.setItem("LinkTreeToken", data.token);
           setSubmitted(true);

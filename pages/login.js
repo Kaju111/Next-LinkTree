@@ -3,17 +3,39 @@ import styles from "../styles/apply.module.css";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Login = () => {
  
+    const router = useRouter()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
   const handleLogin = (e) => {
     e.preventDefault()
     //backend here
-    fetch('http://localhost:8080/api/login')
-    toast('You are logged in')
+    fetch('http://localhost:8080/api/login',{
+      method: 'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    }).then(res => res.json())
+    .then(data=>{
+      if(data.status==='success'){
+        toast('You are logged in')
+        localStorage.setItem('LinkTreeToken', data.token)
+        router.push('./dashboard')
+      }
+      if(data.status === 'not found'){
+        toast.error('User not found')
+      }
+    }).catch(err=>{
+      console.log(err)
+    })
   
   }
 
