@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import LinkBox from '@/components/LinkBox'
-import UserHeader from '@/components/UserHeader'
+import LinkBox from '../components/LinkBox'
+import UserHeader from '../components/UserHeader'
 import { toast } from 'react-toastify'
 
 const dashboard = () => {
@@ -15,11 +15,11 @@ const dashboard = () => {
         'Content-type' : 'application/json'
       },
       body: JSON.stringify({
-        tokenMail: localStorage.getItem("LinkTreeToken")
+        tokenMail: localStorage.getItem("LinkTreeToken")  
       })
     }).then(res=>res.json())
     .then(data=>{
-      if(data.status==='error') return toast.error('Error happend')
+      if(data.status==='error') return toast.error('Error happened')
       setData(data.userData)
     localStorage.setItem('userHandle',data.userData.handle)
     toast.success(data.message)
@@ -40,7 +40,7 @@ const dashboard = () => {
          <LinkBox lbTitle="Growth" lbNumber="12" lbSvg="ig" lbTheme="blue"/>
         </section>
         <section>
-
+          
         </section>
       </main>
       </div>  
