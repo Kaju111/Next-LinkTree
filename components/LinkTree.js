@@ -6,11 +6,11 @@ const LinkTree = ({data}) => {
     const {name, avater, bio, links} = data
   return (
     <>
-     <section>
-        <img src={avater} alt=''/>    
-        <h2>{name? name : 'No Username'}</h2>
-        <p>{bio}</p>
-        <div>
+     <section className='relative'>
+        <img className='w-10 absolute rounded-full left-1/2 -translate-x-1/2 mt-2' src={avater} alt=''/>    
+        <h2 className='text-center text-lg font-bold pt-28'>{name? name : 'No Username'}</h2>
+        <p className='text-center pb-5'>{bio}</p>
+        <div className='flex flex-col justify-center max-w-7xl m-auto md:my-5 w-full md:w-2/5 '>
             <AnimatePresence>
                 {links.map((link, index)=>(
                     <motion.div

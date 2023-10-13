@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LinkBox from "../components/LinkBox";
 import UserHeader from "../components/UserHeader";
 import { toast } from "react-toastify";
+import UserContext from "../context/userContext";
 
 const dashboard = () => {
   const [data, setData] = useState({});
+  const {setUserData} = useContext(UserContext)
 
   useEffect(() => {
     if (!localStorage.getItem("AuthToken"))
@@ -22,6 +24,7 @@ const dashboard = () => {
       .then((data) => {
         if (data.status === "error") return toast.error("Error happened");
         setData(data.userData);
+        setUserData(data.userData)
         localStorage.setItem("userHandle", data.userData.handle);
         toast.success(data.message);
       })
@@ -33,7 +36,7 @@ const dashboard = () => {
   return (
     <>
       <div className="">
-        <UserHeader data={data} />
+        <UserHeader/>
         <main>
           <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
             <LinkBox
@@ -44,11 +47,11 @@ const dashboard = () => {
             />
             <LinkBox
               lbTitle="Growth"
-              lbNumber="12"
+              lbNumber="30%"
               lbSvg="growth"
               lbTheme="blue"
             />
-            <LinkBox lbTitle="Growth" lbNumber="12" lbSvg="ig" lbTheme="blue" />
+            <LinkBox lbTitle="Growth" lbNumber="12" lbSvg="email" lbTheme="blue" />
             <LinkBox lbTitle="Growth" lbNumber="12" lbSvg="ig" lbTheme="blue" />
           </section>
           <section></section>
